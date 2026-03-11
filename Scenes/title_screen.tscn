@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://binvubmi7kok7"]
+
+[ext_resource type="Script" uid="uid://dwdc36s27skl7" path="res://Scripts/title_screen.gd" id="1_p3fck"]
+[ext_resource type="FontFile" uid="uid://v0qcexvwrvy1" path="res://Fonts/PixelifySans-VariableFont_wght.ttf" id="2_4gxqj"]
+
+[node name="TitleScreen" type="Control" unique_id=947255391]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p3fck")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1750993824]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="Label" parent="." unique_id=1286165064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 154.0
+offset_bottom = -486.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_4gxqj")
+theme_override_font_sizes/font_size = 82
+text = "LASER ARACADE"
+horizontal_alignment = 1
+
+[node name="Play" type="Label" parent="." unique_id=468140392]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+theme_override_fonts/font = ExtResource("2_4gxqj")
+theme_override_font_sizes/font_size = 42
+text = "PLAY"
+horizontal_alignment = 1
+
+[node name="Instructions" type="Label" parent="." unique_id=508692903]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -121.0
+offset_top = -256.0
+offset_right = 121.0
+offset_bottom = -205.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.8509804, 0.8509804, 0.8509804, 1)
+theme_override_fonts/font = ExtResource("2_4gxqj")
+theme_override_font_sizes/font_size = 42
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+
+[node name="HighScore" type="Label" parent="." unique_id=1521528692]
+layout_mode = 1
+offset_left = 27.0
+offset_top = 27.0
+offset_right = 214.0
+offset_bottom = 72.0
+theme_override_colors/font_color = Color(0, 1, 0.34901962, 1)
+theme_override_fonts/font = ExtResource("2_4gxqj")
+theme_override_font_sizes/font_size = 36
+text = "Highscore: "
+horizontal_alignment = 1

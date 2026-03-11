@@ -29,8 +29,8 @@ var frenzy_active : bool = false	## true: bombs spawn 2x
 
 ## Constants
 const MAX_LIVES := 3
-# DEV NOTE: MAKE SURE TO INSERT FILE PATH THAT HOLDS LIFE DATA HERE!!!
-const SAVE_PATH := "[INSERT FILE PATH LATER]"
+# Uses Godot's :/user file path
+const SAVE_PATH := "user://highscore.save"
 
 
 func _ready() -> void:
