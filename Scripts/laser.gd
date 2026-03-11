@@ -83,9 +83,11 @@ func _try_zap(shape: Area2D) -> void:
 func _draw() -> void:
 	var half_w := BEAM_WIDTH / 2.0
 	
-	#if is_active:
+	if is_active:
+		_draw_active_beam(half_w)	
+	else:
+		_draw_inactive_beam(half_w)
 		
-
 func _draw_active_beam(half_w: float) -> void:
 	draw_rect(Rect2(-half_w, -12, BEAM_WIDTH, 24), GLOW_COLOR)
 	draw_rect(Rect2(-half_w, -6, BEAM_WIDTH, 12), Color(1.0, 0.25, 0.2, 0.35))

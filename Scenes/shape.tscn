@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://drrus0vlwbqx7"]
+
+[ext_resource type="Script" uid="uid://gaxoyvans4xn" path="res://Scripts/shape.gd" id="1_ibe3b"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trut0"]
+radius = 19.0
+
+[node name="Shape" type="Area2D" unique_id=1512044093]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_ibe3b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=902393150]
+shape = SubResource("CircleShape2D_trut0")
