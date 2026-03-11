@@ -18,12 +18,15 @@ offset_left = 140.0
 offset_top = 30.0
 offset_right = 1140.0
 offset_bottom = 650.0
+alignment = 1
 
 [node name="Back" type="Label" parent="." unique_id=1515711565]
 layout_mode = 0
-offset_top = 680.0
-offset_right = 1280.0
-offset_bottom = 710.0
+offset_left = -11.0
+offset_top = 15.0
+offset_right = 1269.0
+offset_bottom = 45.0
 theme_override_fonts/font = ExtResource("2_5doqj")
+theme_override_font_sizes/font_size = 18
 text = "[Press ESCAPE or BACKSPACE  to return] "
-horizontal_alignment = 1
+horizontal_alignment = 2

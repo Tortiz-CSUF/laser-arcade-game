@@ -80,5 +80,5 @@ func _confirm_selection() -> void:
 		0: 
 			get_tree().change_scene_to_file("[INSERT LEVEL PATH HERE]")
 		1: 
-			get_tree().change_scene_to_file("[INSERT INSTRUCTIONS SCCENE PATH HERE]")
+			get_tree().change_scene_to_file("res://Scenes/instructions.tscn")
 	

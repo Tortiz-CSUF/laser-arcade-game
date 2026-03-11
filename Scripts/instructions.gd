@@ -25,7 +25,7 @@ const FRENZY_COLOR := Color(0.72, 0.15, 0.95)		# frenzy bonus
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	_build_instructions()
 
 func _build_instructions() -> void:
 	## All instruction info will go here 
@@ -58,13 +58,29 @@ func _build_instructions() -> void:
 	_add_spacer(6)
 	
 	# Bonus Shapes
-	_add_heading("BONUS SHAPES")
+	_add_heading("BONUS SHAPES", SUBHEAD_COLOR, 22)
+	_add_line("Shield: (blue star, marked with an 'S')", SHIELD_COLOR)
+	_add_line("		Grants 5 secdons of bomb immunity, so spam that zap!") 
+	_add_line("Frenzy:(purple X, marked with an 'F')", FRENZY_COLOR)
+	_add_line("		Doubles the bomb spawn rate for 8 seconds, so watch out!")
+	_add_spacer(6)
 	
+	# Rounds
+	_add_heading("ROUNDS", SUBHEAD_COLOR, 22)
+	_add_line("The game consists of 3 timed rounds, each more intense than the last:") 
+	_add_line("		Round 1: 30 sec | Multiplier: x1")
+	_add_line("		Round 2: 45 sec | Multiplier: x2")
+	_add_line("		Round 3: 60 sec | Multiplier: x3")
+	_add_line("More shapes, higher speeds, and plenty of bombs to add to the chaos after each round.")
+	_add_spacer(6)
 	
+	# Scoring and Lives
+	_add_heading("LIVES & SCORING", SUBHEAD_COLOR, 22)
+	_add_line("You will start each game with 3 lives (shown as hearts).")
+	_add_line("Lose all 3 lives and it's game over for you!")
+	_add_line("Points will be multiplied based on the round number.")
+	_add_line("Try and beat the highscore!")
 	
-	
-	
-
 # Input
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action("ui_cancel"):
