@@ -53,8 +53,81 @@ const FRENZY_COL: = Color(0.72, 0.1, 0.95)			# purple frenzy
 
 
 
+## Shapes setup
+func setup(type: Type, spd: float, sz: float = 22.0) -> void:
+	# called by game script once instantiated
+	# assigns shape type, speed, size, and picks random color/ value
+	shape_type = type
+	speed = spd
+	size = sz
+	
+	# update collision radius to match visual shape
+	$CollisionShape2D.shape.radius = size * 0.85
+	
+	match type:
+		Type.POSITIVE_CIRCLE:
+			point_value = [10, 20, 30].pick_random()
+			color = POS_COLORS.pick_random()
+		Type.POSITIVE_DIAMONOD:
+			point_value = [20, 30, 40].pick_random()
+			color = POS_COLORS.pick_random()
+		Type.POSITIVE_STAR:
+			point_value = [30, 40, 50].pick_random()
+			color = POS_COLORS.pick_random()
+			
+		Type.NEGATIVE_TRIANGLE:
+			point_value = [-10, -20].pick_random()
+			color = NEG_COLORS.pick_random()
+		Type.NEGATIVE_HEXAGON:
+			point_value = [-20, -30].pick_random()
+			color = NEG_COLORS.pick_random()
+			
+		Type.BOMB:
+			point_value = 0
+			color = BOMB_BODY
+		Type.BOMB_SHIELD:
+			point_value = 0
+			color = SHIELD_COL
+		Type.BOMB_FRENZY:
+			point_value = 0
+			color = FRENZY_COL
+			
+	# redraw so new shape renders new type/color
+	queue_redraw()
+	
+
+## Shape fall logic and create/ destroy
 func _process(delta: float) -> void:
-	pass
+	# fall down at assigned speed
+	position.y += speed * delta
+	time_alive += delta
+	
+	#pulsing for bombs and special effects
+	if shape_type in [Type.BOMB, Type.BOMB_SHIELD, Type.BOMB_FRENZY]:
+		var pulse_scale := 1.0 + sin(time_alive * 6.0) * 0.12
+		scale = Vector2(pulse_scale, pulse_scale)
+		
+	# remove shape if bottom of screen is reached
+	if position.y > 780:
+		queue_free()
+			
+	
+## Shape Zap
+func zap() -> void:
+	# called by laser to sap shape
+	# will flash birght and remove shape
+	
+	if is_zapped:
+		return
+		
+	is_zapped = true
+	set_process(false)		#stop fall
+	
+	#flash -> fade away
+	var tw := create_tween()
+	tw.tween_property(self, "modulate", Color(6, 6, 6, 1), 0.06)
+	tw.tween_property(self, "modulate", Color(1, 1, 1, 0), 0.18)
+	tw.tween_callback(queue_free)
 	
 	
 ## Drawing 

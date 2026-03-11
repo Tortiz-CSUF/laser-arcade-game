@@ -72,7 +72,6 @@ func _on_area_exited(area: Area2D) -> void:
 func _try_zap(shape: Area2D) -> void:
 	# tries to zap a shape, if already zpped = skipped. 
 	# Emits to adjust score and lives and bonus
-			#is_zapped need to be instantiated in shapes scrript when made. 
 	if shape.is_zapped:
 		return 
 	shape.zap()
