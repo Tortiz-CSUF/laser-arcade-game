@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://dbokvtr5q0um"]
 
 [ext_resource type="FontFile" uid="uid://v0qcexvwrvy1" path="res://Fonts/PixelifySans-VariableFont_wght.ttf" id="1_ebmjs"]
+[ext_resource type="Texture2D" uid="uid://b287vysej1bug" path="res://Health System/mini-heart.png" id="2_qxrlw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wrm1d"]
+atlas = ExtResource("2_qxrlw")
+region = Rect2(0, 0, 16, 16)
 
 [node name="Game" type="Node2D" unique_id=1189838333]
 
@@ -18,47 +23,92 @@ offset_top = 10.0
 offset_right = 220.0
 offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("1_ebmjs")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 32
 text = "Round 1"
 horizontal_alignment = 1
 
 [node name="Timer" type="Label" parent="HUD" unique_id=675731421]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 540.0
+offset_top = 10.0
+offset_right = 740.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "Timer: 30"
+horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="HUD" unique_id=1621366022]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 45.0
+offset_right = 320.0
+offset_bottom = 79.0
+theme_override_colors/font_color = Color(0.2, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "Score: 0"
 
 [node name="Highscore" type="Label" parent="HUD" unique_id=503677117]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 320.0
+offset_bottom = 114.0
+theme_override_colors/font_color = Color(0.2, 0.8980392, 1, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "Highscore: 0"
 
 [node name="Multiplier" type="Label" parent="HUD" unique_id=205350310]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 1060.0
+offset_top = 10.0
+offset_right = 1260.0
+offset_bottom = 44.0
+theme_override_colors/font_color = Color(1, 1, 0.2, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "x 1"
+horizontal_alignment = 2
 
 [node name="HeartsContainer" type="HBoxContainer" parent="HUD" unique_id=998447447]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1074.0
+offset_top = 603.0
+offset_right = 1122.0
+offset_bottom = 643.0
+scale = Vector2(4, 4)
+theme_override_constants/separation = 0
 
 [node name="Heart1" type="TextureRect" parent="HUD/HeartsContainer" unique_id=144572167]
 layout_mode = 2
+texture = SubResource("AtlasTexture_wrm1d")
+stretch_mode = 3
 
 [node name="Heart2" type="TextureRect" parent="HUD/HeartsContainer" unique_id=740989764]
 layout_mode = 2
+texture = SubResource("AtlasTexture_wrm1d")
+stretch_mode = 3
 
 [node name="Heart3" type="TextureRect" parent="HUD/HeartsContainer" unique_id=1345318109]
 layout_mode = 2
+texture = SubResource("AtlasTexture_wrm1d")
+stretch_mode = 3
 
 [node name="ShieldIndicator" type="Label" parent="HUD" unique_id=166943290]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 13.0
-offset_bottom = 31.0
+offset_left = 1020.0
+offset_top = 85.0
+offset_right = 1260.0
+offset_bottom = 119.0
+theme_override_colors/font_color = Color(0.3019608, 0.6, 1, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "shield"
+horizontal_alignment = 2
 
 [node name="FrenzyIndicator" type="Label" parent="HUD" unique_id=1065268432]
-offset_left = 12.0
-offset_top = 8.0
-offset_right = 13.0
-offset_bottom = 31.0
+offset_left = 1020.0
+offset_top = 110.0
+offset_right = 1260.0
+offset_bottom = 144.0
+theme_override_colors/font_color = Color(0.72156864, 0.101960786, 1, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 28
+text = "frenzy"
+horizontal_alignment = 2
