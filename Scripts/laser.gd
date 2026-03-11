@@ -79,4 +79,32 @@ func _try_zap(shape: Area2D) -> void:
 	shape_zapped.emit(shape)
 	overlapping_shapes.erase(shape)
 		
+## Laser Drawing 
+func _draw() -> void:
+	var half_w := BEAM_WIDTH / 2.0
+	
+	#if is_active:
+		
+
+func _draw_active_beam(half_w: float) -> void:
+	draw_rect(Rect2(-half_w, -12, BEAM_WIDTH, 24), GLOW_COLOR)
+	draw_rect(Rect2(-half_w, -6, BEAM_WIDTH, 12), Color(1.0, 0.25, 0.2, 0.35))
+	draw_rect(Rect2(-half_w, -2, BEAM_WIDTH, 4), COLOR_ON)
+	draw_line(Vector2(-half_w, 0), Vector2(half_w, 0), CENTER_COLOR, 1.5)
+	
+func _draw_inactive_beam(half_w: float) -> void:
+	var dash_len := 18.0
+	var gap_len := 12.0
+	var x := -half_w
+	
+	# dashed line drawn 
+	while x < half_w:
+		var end_x := minf(x + dash_len, half_w)
+		draw_line(Vector2(x, 0), Vector2(end_x, 0), COLOR_OFF, 2.0)
+		x += dash_len + gap_len
+		
+		# laser path edge guide
+		draw_line(Vector2(-half_w, -BEAM_HALF_HEIGHT), Vector2(half_w, -BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
+		draw_line(Vector2(-half_w, BEAM_HALF_HEIGHT), Vector2(half_w, BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
+
 	
