@@ -53,7 +53,56 @@ const FRENZY_COL: = Color(0.72, 0.1, 0.95)			# purple frenzy
 
 
 
-
-
 func _process(delta: float) -> void:
 	pass
+	
+	
+## Drawing 
+# each shape type will has their own draw function 
+
+#func _draw() -> void:
+	# create draw method for shape and draw point value on top
+	#match shape_type:
+		#$Type.POSITIVE_CIRCLE:
+			
+func _draw_circle() -> void:
+	draw_circle(Vector2.ZERO, size, color)
+	draw_arc(Vector2.ZERO, size, 0, TAU, 32, Color.WHITE, 2.0)
+	
+func _draw_diamond() -> void:
+	var pts := PackedVector2Array([
+		Vector2(0, -size), 
+		Vector2(size, 0), 
+		Vector2(0, size), 
+		Vector2(-size, 0)
+	])
+	
+	draw_colored_polygon(pts, color)
+	draw_polyline(PackedVector2Array(Array(pts) + [pts[0]]), Color.WHITE, 2.0)
+	
+func _draw_star() -> void:
+	var pts := 
+	
+func _draw_triangle() -> void:
+	
+func _draw_hexagon() -> void:
+	
+func _draw_bomb() -> void:
+	
+func _draw_shield() -> void:
+
+func _draw_frenzy() -> void:
+	
+	
+## Shape Geometry Helpers
+func _star_points(outer_r: float, inner_r: float, num_points: int) -> PackedVector2Array:
+	# generates vertices for start points
+	var pts := PackedVector2Array()
+	var step := TAU / (num_points * 2)
+	
+	for i in num_points * 2:
+		var angle := -PI / 2.0 + step * i
+		var r := outer_t if i % 2 == 0 else inner_r
+		pts.append(Vector2(cos(angle) * r, sin(angle) * r))
+		
+	return pts
