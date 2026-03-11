@@ -31,10 +31,18 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	## update selected label with blink  and animated arrows
 	blink_time += delta
-	var show_arrow := fmod(blink_time, 0.6) < 0.4
+	var pulse := 0.6 + sin(blink_time * 5.0) * 0.4
+	if selected_index == 0:
+		play_label.modulate.a = pulse
+		instructions_label.modulate.a = 1.0
+	else:
+		play_label.modulate.a = 1.0
+		instructions_label.modulate.a = pulse
 	
-	play_label.text = _format_item("PLAY", 0, show_arrow)
-	instructions_label.text = _format_item("INSTRUCTIONS", 1, show_arrow)
+	#var show_arrow := fmod(blink_time, 0.6) < 0.4
+	
+	#play_label.text = _format_item("PLAY", 0, show_arrow)
+	#instructions_label.text = _format_item("INSTRUCTIONS", 1, show_arrow)
 
 
 ## Input
@@ -52,11 +60,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		_confirm_selection()
 
 ## Helper functions
-func _format_item(base_text: String, index: int, show_arow: bool) -> String:
+###func _format_item(base_text: String, index: int, show_arow: bool) -> String:
 	## Adds blinking and arcade style arrows on selected option
-	if index == selected_index and show_arow:
-		return "> " + base_text + " <"
-	return base_text
+	#if index == selected_index and show_arow:
+		#return "> " + base_text + " <"
+	#return base_text
 
 func _update_selection() -> void:
 	## applies highlight when options is selected, and grey to unselected.
