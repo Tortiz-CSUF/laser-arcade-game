@@ -124,3 +124,102 @@ theme_override_fonts/font = ExtResource("1_ebmjs")
 theme_override_font_sizes/font_size = 28
 text = "frenzy"
 horizontal_alignment = 2
+
+[node name="RoundAnnounce" type="Label" parent="HUD" unique_id=379825668]
+visible = false
+offset_top = 300.0
+offset_right = 1280.0
+offset_bottom = 380.0
+theme_override_colors/font_color = Color(1, 1, 0.2, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+
+[node name="GameOverOverlay" type="ColorRect" parent="HUD" unique_id=68641856]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.8)
+
+[node name="GameOverTitle" type="Label" parent="HUD/GameOverOverlay" unique_id=1413358054]
+layout_mode = 0
+offset_top = 200.0
+offset_right = 1280.0
+offset_bottom = 263.0
+theme_override_colors/font_color = Color(1, 0.2509804, 0.2509804, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 52
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="GameOverScore" type="Label" parent="HUD/GameOverOverlay" unique_id=1822484945]
+layout_mode = 0
+offset_top = 300.0
+offset_right = 1280.0
+offset_bottom = 340.0
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 26
+text = "SCORE: 0"
+horizontal_alignment = 1
+
+[node name="GameOverRestart" type="Label" parent="HUD/GameOverOverlay" unique_id=1998845520]
+layout_mode = 0
+offset_top = 620.0
+offset_right = 1280.0
+offset_bottom = 683.0
+theme_override_colors/font_color = Color(1, 1, 0.2, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 20
+text = "[Press ENTER to restart]
+[Pess ESCAPE for title screen]"
+horizontal_alignment = 1
+
+[node name="VictoryOverlay" type="ColorRect" parent="HUD" unique_id=579354660]
+visible = false
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0.8)
+
+[node name="VictoryTitle" type="Label" parent="HUD/VictoryOverlay" unique_id=249574162]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 1280.0
+offset_bottom = 240.0
+theme_override_colors/font_color = Color(0.2, 1, 0.4, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 48
+text = "COMPLETE!"
+horizontal_alignment = 1
+
+[node name="VictoryScore" type="Label" parent="HUD/VictoryOverlay" unique_id=1019465904]
+layout_mode = 0
+offset_top = 280.0
+offset_right = 1280.0
+offset_bottom = 320.0
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 32
+text = "SCORE: 0"
+horizontal_alignment = 1
+
+[node name="VictoryHighScore" type="Label" parent="HUD/VictoryOverlay" unique_id=153988462]
+layout_mode = 0
+offset_top = 340.0
+offset_right = 1280.0
+offset_bottom = 380.0
+theme_override_colors/font_color = Color(1, 1, 0.2, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 30
+text = "NEW HIGH SCORE!"
+horizontal_alignment = 1
+
+[node name="VictoryRestartabel4" type="Label" parent="HUD/VictoryOverlay" unique_id=2093742165]
+layout_mode = 0
+offset_top = 620.0
+offset_right = 1280.0
+offset_bottom = 683.0
+theme_override_colors/font_color = Color(0.2, 0.8980392, 1, 1)
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 20
+text = "[Press ENTER to restart]
+[Pess ESCAPE for title screen]"
+horizontal_alignment = 1
