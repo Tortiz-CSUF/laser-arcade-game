@@ -143,7 +143,35 @@ func _draw_frenzy() -> void:
 	draw_line(Vector2(-size, -size), Vector2(size, size), Color.WHITE, 2.0)
 	draw_line(Vector2(size, -size), Vector2(-size, size), Color.WHITE, 2.0)	
 	
+## Point labels
+func _draw_label() -> void:
+	# draw value label in mid shape
+	var font := ThemeDB.fallback_font
+	var fs := 13
+	var text := ""
 	
+	if point_value > 0:
+		text = "+" + str(point_value)
+	elif point_value < 0:
+		text = str(point_value)
+	elif shape_type == Type.BOMB:
+		text = "!" 
+		fs = 16
+	elif shape_type == Type.BOMB_SHIELD:
+		text = "S"
+		fs = 14
+	elif shape_type == Type.BOMB:
+		text = "F"
+		fs = 14
+		
+	if text == "":
+		return
+		
+	# center text
+	var text_w := font.get_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+	draw_string(font, Vector2(-text_w / 2.0, fs / 3.0), text, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color.WHITE)
+
+
 ## Shape Geometry Helpers
 func _star_points(outer_r: float, inner_r: float, num_points: int) -> PackedVector2Array:
 	# generates vertices for start points
