@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://dbokvtr5q0um"]
+
+[ext_resource type="FontFile" uid="uid://v0qcexvwrvy1" path="res://Fonts/PixelifySans-VariableFont_wght.ttf" id="1_ebmjs"]
+
+[node name="Game" type="Node2D" unique_id=1189838333]
+
+[node name="ShapeContainer" type="Node2D" parent="." unique_id=247045474]
+
+[node name="Laser" type="Area2D" parent="." unique_id=1805026491]
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=335682224]
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1059804907]
+
+[node name="Round" type="Label" parent="HUD" unique_id=1534324995]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 220.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("1_ebmjs")
+theme_override_font_sizes/font_size = 20
+text = "Round 1"
+horizontal_alignment = 1
+
+[node name="Timer" type="Label" parent="HUD" unique_id=675731421]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Score" type="Label" parent="HUD" unique_id=1621366022]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Highscore" type="Label" parent="HUD" unique_id=503677117]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Multiplier" type="Label" parent="HUD" unique_id=205350310]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="HeartsContainer" type="HBoxContainer" parent="HUD" unique_id=998447447]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Heart1" type="TextureRect" parent="HUD/HeartsContainer" unique_id=144572167]
+layout_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="HUD/HeartsContainer" unique_id=740989764]
+layout_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="HUD/HeartsContainer" unique_id=1345318109]
+layout_mode = 2
+
+[node name="ShieldIndicator" type="Label" parent="HUD" unique_id=166943290]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 13.0
+offset_bottom = 31.0
+
+[node name="FrenzyIndicator" type="Label" parent="HUD" unique_id=1065268432]
+offset_left = 12.0
+offset_top = 8.0
+offset_right = 13.0
+offset_bottom = 31.0
