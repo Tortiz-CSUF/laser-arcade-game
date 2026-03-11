@@ -1,7 +1,10 @@
 [gd_scene format=3 uid="uid://dbokvtr5q0um"]
 
 [ext_resource type="FontFile" uid="uid://v0qcexvwrvy1" path="res://Fonts/PixelifySans-VariableFont_wght.ttf" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://d3nn8h5d1pygq" path="res://Scripts/laser.gd" id="1_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://b287vysej1bug" path="res://Health System/mini-heart.png" id="2_qxrlw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dryh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wrm1d"]
 atlas = ExtResource("2_qxrlw")
@@ -12,6 +15,15 @@ region = Rect2(0, 0, 16, 16)
 [node name="ShapeContainer" type="Node2D" parent="." unique_id=247045474]
 
 [node name="Laser" type="Area2D" parent="." unique_id=1805026491]
+position = Vector2(640, 550)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_wrm1d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser" unique_id=300934285]
+position = Vector2(1280, 10)
+shape = SubResource("RectangleShape2D_3dryh")
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=335682224]
 
@@ -93,9 +105,9 @@ stretch_mode = 3
 
 [node name="ShieldIndicator" type="Label" parent="HUD" unique_id=166943290]
 offset_left = 1020.0
-offset_top = 85.0
+offset_top = 80.0
 offset_right = 1260.0
-offset_bottom = 119.0
+offset_bottom = 114.0
 theme_override_colors/font_color = Color(0.3019608, 0.6, 1, 1)
 theme_override_fonts/font = ExtResource("1_ebmjs")
 theme_override_font_sizes/font_size = 28
