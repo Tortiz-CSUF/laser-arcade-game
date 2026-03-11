@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://dbokvtr5q0um"]
 
+[ext_resource type="Script" uid="uid://njyrrlnvb6xh" path="res://Scripts/game.gd" id="1_3dryh"]
 [ext_resource type="FontFile" uid="uid://v0qcexvwrvy1" path="res://Fonts/PixelifySans-VariableFont_wght.ttf" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://d3nn8h5d1pygq" path="res://Scripts/laser.gd" id="1_wrm1d"]
 [ext_resource type="Texture2D" uid="uid://b287vysej1bug" path="res://Health System/mini-heart.png" id="2_qxrlw"]
@@ -11,6 +12,7 @@ atlas = ExtResource("2_qxrlw")
 region = Rect2(0, 0, 16, 16)
 
 [node name="Game" type="Node2D" unique_id=1189838333]
+script = ExtResource("1_3dryh")
 
 [node name="ShapeContainer" type="Node2D" parent="." unique_id=247045474]
 
