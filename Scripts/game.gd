@@ -146,7 +146,44 @@ func _end_round() -> void:
 		
 	
 ## Shape spawns
-
+func _on_spawn_timer_timeout() -> void:
+	# creates new shape with randoms weights/ speed
+	var shape_instance := ShapeScene.instantiate()
+	var chosen_type := _pick_weighted_type
+	var spd := randf_range(current_round_cfg["speed_min"], current_round_cfg["speed_max"])
+	
+	shape_instance.setup(chosen_type, spd, current_round_cfg["shape_size"])
+	
+	var margin := 40.0
+	shape_instance.position = Vector2(randf_range(margin, 1280.0 - margin), -40.0)
+	
+	shape_container.add_child(shape_instance)
+	
+	
+	
+func _pick_weighted_type() -> int:
+	# selects a shape type using round weights | more weight = more likely 
+	var weights: Array = current_round_cfg["weights"]
+	
+	# double bomb weight for bomb frenzy
+	if GameManager.frenzy_active:
+		weights = weights.duplicate()
+		weights[5] = weights[5] * 2		#bomb at index 5
+		
+	# determines total weight and picks random val
+	var total := 0
+	for w in weights:
+		total += w
+	var roll := randi() % total
+	var cumulative := 0
+	
+	for i in weights.size():
+		cumulative += weights[i]
+		if roll < cumulative:
+			return i
+			
+	return 0
+	
 
 ## Zap Handler
 func _on_shape_zapped(shape: Area2D) -> void:
