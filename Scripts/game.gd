@@ -68,9 +68,9 @@ const ROUNDS := {
 
 # end game condition overlays
 @onready var round_announce: Label = $HUD/RoundAnnounce
-@onready var game_over_overlay: Label = $HUD/GameOverOverlay
+@onready var game_over_overlay: ColorRect = $HUD/GameOverOverlay
 @onready var game_over_score: Label =$HUD/GameOverOverlay/GameOverScore
-@onready var victory_overlay: Label = $HUD/VictoryOverlay
+@onready var victory_overlay: ColorRect = $HUD/VictoryOverlay
 @onready var victory_score: Label = $HUD/VictoryOverlay/VictoryScore
 @onready var victory_high_score: Label = $HUD/VictoryOverlay/VictoryHighScore
 
@@ -198,7 +198,7 @@ func _end_round() -> void:
 func _on_spawn_timer_timeout() -> void:
 	# creates new shape with randoms weights/ speed
 	var shape_instance := ShapeScene.instantiate()
-	var chosen_type := _pick_weighted_type
+	var chosen_type := _pick_weighted_type()
 	var spd := randf_range(current_round_cfg["speed_min"], current_round_cfg["speed_max"])
 	
 	shape_instance.setup(chosen_type, spd, current_round_cfg["shape_size"])
@@ -299,7 +299,7 @@ func _update_hud() -> void:
 func _on_score_chagned(new_score: int) -> void:
 	score_label.text = "SCORE: " + str(new_score)
 	
-func _on_lives_changed(new_lives: int) -> void:
+func _on_lives_changed(_new_lives: int) -> void:
 	_update_hearts()
 	
 func _on_multiplier_changed(new_multiplier: int) -> void:

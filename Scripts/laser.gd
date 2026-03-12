@@ -30,7 +30,7 @@ func _ready() -> void:
 	area_exited.connect(_on_area_exited)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#SPACE input is checked each frame. 
 	if not can_fire:
 		if is_active:

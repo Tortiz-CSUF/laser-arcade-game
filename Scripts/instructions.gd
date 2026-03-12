@@ -94,10 +94,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 	
 ## Helper Functions 
-func _add_heading(text: String, color: Color, size: int) -> void:
+func _add_heading(text: String, color: Color, font_size: int) -> void:
 	var lbl := Label.new()
 	lbl.text = text
-	lbl.add_theme_font_size_override("font_size", size)
+	lbl.add_theme_font_size_override("font_size", font_size)
 	lbl.add_theme_color_override("font_color", color)
 	content.add_child(lbl)
 	

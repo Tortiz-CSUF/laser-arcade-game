@@ -84,12 +84,12 @@ func set_round(round_num: int) -> void:
 	multiplier_changed.emit(multiplier)
 	
 ## Special Effects
-func activate_sheild(duration: float) -> void:
+func activate_shield(duration: float) -> void:
 	## turns bomb sheild on and runs a timer
 	shield_active = true
 	shield_started.emit(duration)
 
-func deactivate_sheild() -> void:
+func deactivate_shield() -> void:
 	## truns off bomb shield when timer runs out
 	shield_active = false
 	shield_ended.emit()
@@ -119,3 +119,16 @@ func load_high_score() -> void:
 		var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
 		if file:
 			high_score = file.get_32()
+			
+## Reset Game 
+# resets values for fresh game state
+func reset() -> void:
+	score = 0
+	lives = MAX_LIVES
+	current_round = 1
+	multiplier = 1
+	shield_active = false
+	frenzy_active = false
+	score_chagned.emit(score)
+	lives_changed.emit(lives)
+	multiplier_changed.emit(multiplier)
