@@ -120,11 +120,20 @@ func _start_round(round_num: int) -> void:
 	
 	# allow gameplay
 	is_playing = true
-	
-	
-	
-	
+	laser.can_fire = true
+	spawn_timer.wait_time = current_round_cfg["spawn_interval"]
+	spawn_timer.start()	
 
+func _end_round() -> void:
+	# at end of round, stops shape spawns and decide transition logic
+	is_playing = false	
+	laser.can_fire = false
+	spawn_timer.stop()
+	
+	# clear shapes and special effects
+	_clear_shapes()
+	_clear_effects()
+	
 ## Shape spawns
 
 
@@ -145,3 +154,18 @@ func _update_hud() -> void:
 	
 
 ## Helpers
+func _clear_shapes() -> void:
+	for child in shape_container.get_children():
+		child.queue_free()
+		
+func _clear_effects() -> void:
+	shield_time_left = 0.0
+	frenzy_time_left = 0.0
+	shield_indicator.text = ""
+	frenzy_indicator.text = ""
+	GameManager.deactivate_sheild()
+	GameManager.deactivate_frenzy()
+	
+	
+	
+	
