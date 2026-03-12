@@ -91,13 +91,63 @@ func _ready() -> void:
 	# reset each new game
 	GameManager.reset()
 	
+	# Connects GameManager signals -> HUD
+	GameManager.lives_changed.connect((_on_lives_changed))
+	GameManager.score_chagned.connect(_on_score_chagned)
+	GameManager.multiplier_changed.connect(_on_multiplier_changed)
+	
+	# Other Signal connections
+	laser.shape_zapped.connect(_on_shape_zapped)
+	spawn_timer.timeout.connect(_on_spawn_timer_timeout)
+	
+	# populate HUD with starting vals
+	_update_hud()
+	_update_hearts()
+	
+	# start round 1
+	await  get_tree().create_timer(0.4).timeout
+	_start_round(1)
+	
 
 func _process(delta: float) -> void:
-	pass
+	# updates round timer, effect timers and indicators
+	if not is_playing:
+		return
+	
+	# round timer
+	if round_time_left <= 0.0:
+		_end_round()
+		return
+		
+	# shield timer
+	if shield_time_left > 0.0:
+		shield_time_left -= delta
+		shield_indicator.text = "SHIELD: " + str(ceili(shield_time_left)) + "s"
+		if shield_time_left <= 0.0:
+			GameManager.deactivate_sheild()
+			shield_indicator.text = ""
+			
+	# frenzy timer
+	if frenzy_time_left > 0.0:
+		frenzy_time_left -= delta
+		frenzy_indicator.text = "FRENZY: " + str(ceili(frenzy_time_left)) + "s"
+		if frenzy_time_left <= 0.0:
+			GameManager.deactivate_sheild()
+			frenzy_indicator.text = ""
+			# restores normal spawn rate
+			spawn_timer.wait_time = current_round_cfg["spawn_interval"]
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	pass
+	# restart/ quit input on game over/ victory overlays
+	if not event.is_action_pressed("ui_accept") and not event.is_action_pressed("ui_cancel"):
+		return 
+		
+	if is_game_over or victory_overlay.visible:
+		if event.is_action_pressed("ui_accept"):
+			get_tree().reload_current_scene()
+	elif event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
 	
 ## Round management
 func _start_round(round_num: int) -> void:
@@ -136,9 +186,8 @@ func _end_round() -> void:
 	
 	if GameManager.current_round < 3:
 		# short pause for next round
-		await  get_tree().create_timer(1.2).timeout
-		_start_round(GameManager.current_round + 1)
-		
+		await get_tree().create_timer(1.2).timeout
+		_start_round(GameManager.current_round + 1)		
 	else:
 		# game complete
 		await get_tree().create_timer(1.0).timeout

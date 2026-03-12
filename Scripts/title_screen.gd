@@ -78,7 +78,7 @@ func _confirm_selection() -> void:
 	### NOTE: NEED TO INSERT SCENES PATHS TO OPTION LOGIC
 	match selected_index:
 		0: 
-			get_tree().change_scene_to_file("[INSERT LEVEL PATH HERE]")
+			get_tree().change_scene_to_file("res://Scenes/game.tscn")
 		1: 
 			get_tree().change_scene_to_file("res://Scenes/instructions.tscn")
 	
