@@ -134,14 +134,74 @@ func _end_round() -> void:
 	_clear_shapes()
 	_clear_effects()
 	
+	if GameManager.current_round < 3:
+		# short pause for next round
+		await  get_tree().create_timer(1.2).timeout
+		_start_round(GameManager.current_round + 1)
+		
+	else:
+		# game complete
+		await get_tree().create_timer(1.0).timeout
+		_show_victory()
+		
+	
 ## Shape spawns
 
 
 ## Zap Handler
-
+func _on_shape_zapped(shape: Area2D) -> void:
+	# when a shape is zapped, called by laser signal to use correct handler
+	match shape.shape_type:
+		Type.POSITIVE_CIRCLE, Type.POSITIVE_DIAMONOD, Type.POSITIVE_STAR:
+			GameManager.add_score(shape.point_value)
+			
+		Type.BOMB:
+			var game_over : = GameManager.lose_life()
+			if game_over:
+				_show_game_over()
+				
+		Type.BOMB_SHIELD:
+			# 5 sec shield 
+			shield_time_left = 5.0
+			GameManager.activate_sheild(5.0)
+			
+		Type.BOMB_FRENZY:
+			# 8 sec bomb frenzy
+			frenzy_time_left = 8.0
+			GameManager.activate_frenzy(8.0)
+			# creates more frequent spawns
+			spawn_timer.wait_time = current_round_cfg["spawn_interval"] * 0.5
+			
+			
 ## Game Over
+func  _show_game_over() -> void:
+	# stops gameplay and shows game over overlay
+	is_playing = false
+	is_game_over = true
+	laser.can_fire = false
+	spawn_timer.stop()
+	
+	# checks if new high score achieved
+	GameManager.check_high_score()
+	
+	game_over_score.text = "SCORE: " + str(GameManager.score)
+	game_over_overlay.visible = true
+	
 
 ## Victory
+func _show_victory() -> void:
+	# show end game overlay with game score and high score
+	var is_new_high := GameManager.check_high_score()
+	
+	victory_score.text = "FINAL SCORE: " + str(GameManager.score)
+	
+	if is_new_high:
+		victory_high_score.text = "NEW HIGH SCORE! "
+	else: 
+		victory_high_score.text = "HGIH SCORE: " + str(GameManager.high_score)
+		
+	victory_overlay.visible = true
+	
 
 ## HUD Managment
 func _update_hud() -> void:
@@ -149,9 +209,34 @@ func _update_hud() -> void:
 	high_score_label.text = "HIGH SCORE: " + str(GameManager.high_score)
 	multiplier_label.text = "X " + str(GameManager.multiplier)
 	round_label.text = "ROUND " + str(GameManager.current_round)
+
+func _on_score_chagned(new_score: int) -> void:
+	score_label.text = "SCORE: " + str(new_score)
 	
-	 
+func _on_lives_changed(new_lives: int) -> void:
+	_update_hearts()
 	
+func _on_multiplier_changed(new_multiplier: int) -> void:
+	multiplier_label.text = "X " + str(new_multiplier)
+	
+	# will flash to indicate value multi increase
+	if new_multiplier > 1:
+		round_announce.text = "X " + str(new_multiplier) + "MULTIPLIER!"
+		round_announce.visible = true
+		await get_tree().create_timer(1.0).timeout
+		if not is_between_rounds:
+			round_announce.visible = false
+				
+				
+func _update_hearts() -> void:
+	# uses atlas to set filled or empty hearts
+	for i in hearts.size():
+		var tex: AtlasTexture = hearts[i].texture as AtlasTexture
+		if tex: 
+			if i < GameManager.lives:
+				tex.region = Rect2(0, 0, 16, 16)		# filled
+			else:
+				tex.region = Rect2(16, 0, 16, 16)		# empty
 
 ## Helpers
 func _clear_shapes() -> void:
@@ -165,7 +250,5 @@ func _clear_effects() -> void:
 	frenzy_indicator.text = ""
 	GameManager.deactivate_sheild()
 	GameManager.deactivate_frenzy()
-	
-	
 	
 	
