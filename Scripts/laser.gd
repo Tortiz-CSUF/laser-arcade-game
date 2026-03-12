@@ -29,6 +29,7 @@ func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	#SPACE input is checked each frame. 
@@ -60,6 +61,7 @@ func _deactivate() -> void:
 ## Collisions
 func _on_area_entered(area: Area2D) -> void:
 	# tracks shape if in laser path and zaps it
+	print("Area entered: ", Area2D, " has zap: ", area.has_method("zap"))
 	if area.has_method("zap"):
 		overlapping_shapes.append(area)
 		if is_active:
@@ -104,8 +106,8 @@ func _draw_inactive_beam(half_w: float) -> void:
 		draw_line(Vector2(x, 0), Vector2(end_x, 0), COLOR_OFF, 2.0)
 		x += dash_len + gap_len
 		
-		# laser path edge guide
-		draw_line(Vector2(-half_w, -BEAM_HALF_HEIGHT), Vector2(half_w, -BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
-		draw_line(Vector2(-half_w, BEAM_HALF_HEIGHT), Vector2(half_w, BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
+	# laser path edge guide
+	draw_line(Vector2(-half_w, -BEAM_HALF_HEIGHT), Vector2(half_w, -BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
+	draw_line(Vector2(-half_w, BEAM_HALF_HEIGHT), Vector2(half_w, BEAM_HALF_HEIGHT), GUIDE_COLOR, 1.0)
 
 	

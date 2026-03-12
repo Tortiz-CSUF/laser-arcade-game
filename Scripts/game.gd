@@ -22,7 +22,7 @@ const ROUNDS := {
 		"speed_min": 100.0,
 		"speed_max": 200.0,
 		"shape_size": 22.0,
-		"weights": [30, 20, 0, 12, 0, 10, 4],
+		"weights": [30, 20, 0, 12, 0, 10, 4, 4],
 	},
 	
 	2: {
@@ -115,6 +115,9 @@ func _process(delta: float) -> void:
 		return
 	
 	# round timer
+	round_time_left -= delta
+	timer_label.text = "Timer: " + str(ceili(round_time_left))
+	
 	if round_time_left <= 0.0:
 		_end_round()
 		return
@@ -124,7 +127,7 @@ func _process(delta: float) -> void:
 		shield_time_left -= delta
 		shield_indicator.text = "SHIELD: " + str(ceili(shield_time_left)) + "s"
 		if shield_time_left <= 0.0:
-			GameManager.deactivate_sheild()
+			GameManager.deactivate_shield()
 			shield_indicator.text = ""
 			
 	# frenzy timer
@@ -132,7 +135,7 @@ func _process(delta: float) -> void:
 		frenzy_time_left -= delta
 		frenzy_indicator.text = "FRENZY: " + str(ceili(frenzy_time_left)) + "s"
 		if frenzy_time_left <= 0.0:
-			GameManager.deactivate_sheild()
+			GameManager.deactivate_frenzy()
 			frenzy_indicator.text = ""
 			# restores normal spawn rate
 			spawn_timer.wait_time = current_round_cfg["spawn_interval"]
@@ -146,8 +149,8 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_game_over or victory_overlay.visible:
 		if event.is_action_pressed("ui_accept"):
 			get_tree().reload_current_scene()
-	elif event.is_action_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
+		elif event.is_action_pressed("ui_cancel"):
+			get_tree().change_scene_to_file("res://Scenes/title_screen.tscn")
 	
 ## Round management
 func _start_round(round_num: int) -> void:
@@ -241,8 +244,11 @@ func _on_shape_zapped(shape: Area2D) -> void:
 		Type.POSITIVE_CIRCLE, Type.POSITIVE_DIAMONOD, Type.POSITIVE_STAR:
 			GameManager.add_score(shape.point_value)
 			
+		Type.NEGATIVE_TRIANGLE, Type.NEGATIVE_HEXAGON:
+			GameManager.add_score(shape.point_value)
+			
 		Type.BOMB:
-			var game_over : = GameManager.lose_life()
+			var game_over := GameManager.lose_life()
 			if game_over:
 				_show_game_over()
 				
@@ -334,7 +340,7 @@ func _clear_effects() -> void:
 	frenzy_time_left = 0.0
 	shield_indicator.text = ""
 	frenzy_indicator.text = ""
-	GameManager.deactivate_sheild()
+	GameManager.deactivate_shield()
 	GameManager.deactivate_frenzy()
 	
 	

@@ -19,7 +19,7 @@ script = ExtResource("1_3dryh")
 [node name="Laser" type="Area2D" parent="." unique_id=1805026491]
 position = Vector2(640, 550)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 4
 monitorable = false
 script = ExtResource("1_wrm1d")
 
@@ -47,7 +47,7 @@ offset_right = 740.0
 offset_bottom = 40.0
 theme_override_fonts/font = ExtResource("1_ebmjs")
 theme_override_font_sizes/font_size = 28
-text = "Timer: "
+text = "Timer: 0"
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="HUD" unique_id=1621366022]

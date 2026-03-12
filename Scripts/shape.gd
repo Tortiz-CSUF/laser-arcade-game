@@ -48,8 +48,8 @@ const NEG_COLORS: Array[Color] = [
 
 const BOMB_BODY: Color = Color(0.35, 0.35, 0.35)		# body base color
 const BOMB_RIM: Color = Color(1.0, 0.45, 0.0)			# accent color (orange)
-const SHIELD_COL: = Color(0.25, 0.55, 1.0)			# blue shield
-const FRENZY_COL: = Color(0.72, 0.1, 0.95)			# purple frenzy
+const SHIELD_COL := Color(0.25, 0.55, 1.0)			# blue shield
+const FRENZY_COL := Color(0.72, 0.1, 0.95)			# purple frenzy
 
 
 
@@ -94,7 +94,7 @@ func setup(type: Type, spd: float, sz: float = 22.0) -> void:
 			
 	# redraw so new shape renders new type/color
 	queue_redraw()
-	
+
 
 ## Shape fall logic and create/ destroy
 func _process(delta: float) -> void:
@@ -133,10 +133,26 @@ func zap() -> void:
 ## Drawing 
 # each shape type will has their own draw function 
 
-#func _draw() -> void:
+func _draw() -> void:
 	# create draw method for shape and draw point value on top
-	#match shape_type:
-		#$Type.POSITIVE_CIRCLE:
+	match shape_type:
+		Type.POSITIVE_CIRCLE:
+			_draw_circle()
+		Type.POSITIVE_DIAMONOD:
+			_draw_diamond()
+		Type.POSITIVE_STAR:
+			_draw_star()
+		Type.NEGATIVE_TRIANGLE:
+			_draw_triangle()
+		Type.NEGATIVE_HEXAGON:
+			_draw_hexagon()
+		Type.BOMB:
+			_draw_bomb()
+		Type.BOMB_SHIELD:
+			_draw_shield()
+		Type.BOMB_FRENZY:
+			_draw_frenzy()
+	_draw_label()
 			
 func _draw_circle() -> void:
 	draw_circle(Vector2.ZERO, size, color)
@@ -183,8 +199,9 @@ func _draw_bomb() -> void:
 	draw_arc(Vector2.ZERO, size, 0, TAU, 32, BOMB_RIM, 2.5)
 	
 	# Fuse
+	draw_line(Vector2(0, -size), Vector2(4, -size -12), Color(0.6, 0.5, 0.3), 2.5)
 	var spark_alpha := 0.7 + sin(time_alive * 12.0) * 0.3
-	draw_line(Vector2(0, -size), Vector2(4, -size -12), Color(0.708, 0.708, 0.708, 1.0), spark_alpha)
+	draw_circle(Vector2(4, -size - 14), 4, Color(1.0, 0.9, 0.2,spark_alpha))
 	
 	# x marking
 	draw_line(Vector2(-6, -4), Vector2(6, -4), BOMB_RIM, 2.0)
@@ -233,7 +250,7 @@ func _draw_label() -> void:
 	elif shape_type == Type.BOMB_SHIELD:
 		text = "S"
 		fs = 14
-	elif shape_type == Type.BOMB:
+	elif shape_type == Type.BOMB_FRENZY:
 		text = "F"
 		fs = 14
 		
