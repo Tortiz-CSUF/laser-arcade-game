@@ -248,14 +248,14 @@ func _on_shape_zapped(shape: Area2D) -> void:
 			GameManager.add_score(shape.point_value)
 			
 		Type.BOMB:
-			var game_over := GameManager.lose_life()
+			var game_over = GameManager.lose_life()
 			if game_over:
 				_show_game_over()
 				
 		Type.BOMB_SHIELD:
 			# 5 sec shield 
 			shield_time_left = 5.0
-			GameManager.activate_sheild(5.0)
+			GameManager.activate_shield(5.0)
 			
 		Type.BOMB_FRENZY:
 			# 8 sec bomb frenzy

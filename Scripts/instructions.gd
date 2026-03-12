@@ -60,7 +60,7 @@ func _build_instructions() -> void:
 	# Bonus Shapes
 	_add_heading("BONUS SHAPES", SUBHEAD_COLOR, 22)
 	_add_line("Shield: (blue star, marked with an 'S')", SHIELD_COLOR)
-	_add_line("		Grants 5 secdons of bomb immunity, so spam that zap!") 
+	_add_line("		Grants 5 seconds of bomb immunity, so spam that zap!") 
 	_add_line("Frenzy:(purple X, marked with an 'F')", FRENZY_COLOR)
 	_add_line("		Doubles the bomb spawn rate for 8 seconds, so watch out!")
 	_add_spacer(6)
