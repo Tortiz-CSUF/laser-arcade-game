@@ -74,12 +74,74 @@ const ROUNDS := {
 @onready var victory_score: Label = $HUD/VictoryOverlay/VictoryScore
 @onready var victory_high_score: Label = $HUD/VictoryOverlay/VictoryHighScore
 
+# game state vars
+var round_time_left: float = 0.0			# secs left in round
+var is_playing: bool = false				# true when active gameplay
+var is_game_over: bool = false				# true when all live depleted
+var is_between_rounds: bool = false			# true during transitions
+var current_round_cfg: Dictionary = {}		# config for active round	
 
-# Called when the node enters the scene tree for the first time.
+# effect timers
+var shield_time_left: float = 0.0			# secs for shield left
+var frenzy_time_left: float = 0.0			# secs for frenzy left
+
+
+
 func _ready() -> void:
-	pass # Replace with function body.
+	# reset each new game
+	GameManager.reset()
+	
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	pass
+	
+## Round management
+func _start_round(round_num: int) -> void:
+	# sets round data
+	GameManager.set_round(round_num)
+	current_round_cfg = ROUNDS[round_num]
+	round_time_left = current_round_cfg["duration"]
+	
+	# HUD updates
+	round_label.text = "ROUND " + str(round_num)
+	_update_hud()
+	
+	# displays round at start
+	is_between_rounds = true
+	round_announce.text = "ROUND " + str(round_num)
+	round_announce.visible = true
+	await  get_tree().create_timer(1.8).timeout
+	round_announce.visible = false
+	is_between_rounds = false
+	
+	# allow gameplay
+	is_playing = true
+	
+	
+	
+	
+
+## Shape spawns
+
+
+## Zap Handler
+
+## Game Over
+
+## Victory
+
+## HUD Managment
+func _update_hud() -> void:
+	score_label.text = "SCORE: " + str(GameManager.score)
+	high_score_label.text = "HIGH SCORE: " + str(GameManager.high_score)
+	multiplier_label.text = "X " + str(GameManager.multiplier)
+	round_label.text = "ROUND " + str(GameManager.current_round)
+	
+	 
+	
+
+## Helpers
